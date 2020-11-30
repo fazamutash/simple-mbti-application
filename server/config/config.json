@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "dbuser",
+    "password": "dbuserpwd",
+    "database": "mbti_db",
+    "host": "mysql-db",
+    "dialect": "mysql",
+    "port": "3306"
+  }
+}
