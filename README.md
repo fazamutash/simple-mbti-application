@@ -4,7 +4,7 @@ To bring the project up first [install Docker](https://www.docker.com/), then ru
 docker-compose up
 ```
 
-The docker-compose.yml file routes port 80 on your host to the React app running on 3000 on the Docker environment, so once the system is up just go to http://localhost:3000.
+Once the system is up just go to http://localhost:3000.
 
 To bring it down:
 
