@@ -18,6 +18,7 @@ services:
       - mbti-network
 
   node-app:
+    image: node-app
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -48,6 +49,17 @@ services:
       - ./web-client/package.json:/opt/package.json
       - ./web-client/package-lock.json:/opt/package-lock.json
       - notused:/opt/app/node_modules
+    networks:
+      - mbti-network
+
+  myapp-tests:
+    image: node-app
+    command: dockerize -wait tcp://node-app:5000 -wait tcp://mysql-db:3306 -timeout 30s bash -c "npm run test"
+    expose:
+      - 8002
+    depends_on:
+      - node-app
+      - mysql-db
     networks:
       - mbti-network
 

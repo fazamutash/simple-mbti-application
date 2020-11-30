@@ -47,6 +47,25 @@ function connectToDatabase() {
     .authenticate()
     .then(() => {
       console.log("Connection has been established successfully.");
+      Email.findById(1).then(email => {
+        if (!email) {
+          console.log("Database is not seeded, will run seeds now...");
+          const { exec } = require("child_process");
+          try {
+            exec("/opt/node_modules/.bin/sequelize db:seed:all", (err, stdout, stderr) => {
+              if (err) {
+                console.log(err);
+                return;
+              }
+              console.log(stdout);
+            });
+          } catch (error) {
+            console.log("Error while seeding database: ", error);
+          }
+        } else {
+          console.log("Database already seeded.");
+        }
+      });
     })
     .catch(err => {
       console.log("Unable to connect to the database:", err);
